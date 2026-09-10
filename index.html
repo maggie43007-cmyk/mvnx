@@ -1398,13 +1398,14 @@
   loadState().then(render);
 
 })();
-</script>
-</body>
-</html>
-setTimeout(() => {
+  setTimeout(() => {
   try {
     root.innerHTML = renderTopbar() + "<h2 style='color:white;text-align:center;'>MVNX Loaded ✅</h2>";
   } catch (e) {
     console.log(e);
   }
 }, 1000);
+</script>
+</body>
+</html>
+
