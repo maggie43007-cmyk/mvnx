@@ -1117,7 +1117,7 @@
     var elm = e.currentTarget;
     var action = elm.getAttribute("data-action");
 
-    if (action === "go-join"){ authError=""; authMode="signin"; screen="join"; loadState().then(render); }
+    if (action === "go-join"){ authError=""; authMode="signin"; screen="join"; try {   loadState(); } catch (e) {   console.log("Load failed, continuing..."); }  render(); }
     else if (action === "go-admin-login"){ adminLoginError=""; screen="admin-login"; render(); }
     else if (action === "go-landing"){ screen="landing"; render(); }
     else if (action === "logout"){ session={role:null,userId:null}; screen="landing"; render(); }
@@ -1131,10 +1131,10 @@
       playerTab = elm.getAttribute("data-tab");
       submitError = "";
       if (playerTab === "leaderboard" || playerTab === "history" || playerTab === "card" || playerTab === "shop"){
-        loadState().then(render);
+        try {   loadState(); } catch (e) {   console.log("Load failed, continuing..."); }  render();
       } else render();
     }
-    else if (action === "admin-tab"){ adminTab = elm.getAttribute("data-tab"); loadState().then(render); }
+    else if (action === "admin-tab"){ adminTab = elm.getAttribute("data-tab"); try {   loadState(); } catch (e) {   console.log("Load failed, continuing..."); }  render(); }
     else if (action === "admin-filter"){ adminFilter = elm.getAttribute("data-filter"); render(); }
 
     else if (action === "pick-category"){ submitForm.category = elm.getAttribute("data-cat"); render(); }
@@ -1248,7 +1248,7 @@
       session = { role:"admin", userId:null };
       adminTab = "queue"; adminFilter = "pending";
       screen = "admin";
-      loadState().then(render);
+      try {   loadState(); } catch (e) {   console.log("Load failed, continuing..."); }  render();
     } else {
       adminLoginError = "Wrong password.";
       render();
